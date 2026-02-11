@@ -271,7 +271,7 @@ function updateSeminarDetails() {
 
 async function loadEvents() {
   try {
-    const response = await fetch("/api/admin/events");
+    const response = await fetch("api/admin/events");
     if (!response.ok) throw new Error("failed to load events");
 
     const data = await response.json();
@@ -355,7 +355,7 @@ seminarForm.addEventListener("submit", async (event) => {
       variant: attribution.variant,
     };
 
-    const result = await postJson("/api/public/seminar-signups", payload);
+    const result = await postJson("api/public/seminar-signups", payload);
     seminarStatusEl.style.color = "#1e8e5a";
     seminarStatusEl.textContent = `${name}, your seminar seat is reserved. We will call ${phone} to confirm details.`;
 
@@ -387,7 +387,7 @@ consultForm.addEventListener("submit", async (event) => {
 
   try {
     const attribution = getAttribution();
-    await postJson("/api/public/consultations", {
+    await postJson("api/public/consultations", {
       name,
       phone,
       zip,

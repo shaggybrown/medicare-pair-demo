@@ -233,13 +233,13 @@ function renderPostcards() {
 
 async function loadAll() {
   const [dashboard, workflows, consultations, attendees, events, tasks, postcards] = await Promise.all([
-    api("/api/admin/dashboard"),
-    api("/api/admin/workflows"),
-    api("/api/admin/consultations"),
-    api("/api/admin/attendees"),
-    api("/api/admin/events"),
-    api("/api/admin/tasks"),
-    api("/api/admin/postcards"),
+    api("api/admin/dashboard"),
+    api("api/admin/workflows"),
+    api("api/admin/consultations"),
+    api("api/admin/attendees"),
+    api("api/admin/events"),
+    api("api/admin/tasks"),
+    api("api/admin/postcards"),
   ]);
 
   state.dashboard = dashboard.summary;
@@ -263,7 +263,7 @@ async function saveConsultationRow(row) {
   const id = row.dataset.id;
   const status = row.querySelector("[data-field='status']").value;
   const assignedTo = row.querySelector("[data-field='assignedTo']").value.trim();
-  await api(`/api/admin/consultations/${id}`, {
+  await api(`api/admin/consultations/${id}`, {
     method: "PATCH",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ status, assignedTo }),
@@ -273,7 +273,7 @@ async function saveConsultationRow(row) {
 async function saveAttendeeRow(row) {
   const id = row.dataset.id;
   const status = row.querySelector("[data-field='status']").value;
-  await api(`/api/admin/attendees/${id}`, {
+  await api(`api/admin/attendees/${id}`, {
     method: "PATCH",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ status }),
@@ -323,7 +323,7 @@ eventForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   try {
-    await api("/api/admin/events", {
+    await api("api/admin/events", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
@@ -347,7 +347,7 @@ taskForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   try {
-    await api("/api/admin/tasks", {
+    await api("api/admin/tasks", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
@@ -370,7 +370,7 @@ postcardForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   try {
-    await api("/api/admin/postcards", {
+    await api("api/admin/postcards", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({

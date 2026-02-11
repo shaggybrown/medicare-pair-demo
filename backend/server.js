@@ -18,6 +18,7 @@ const {
 const PORT = Number(process.env.PORT || 8787);
 const CONNECTOR_TICK_MS = Number(process.env.CONNECTOR_TICK_MS || 60000);
 const rootDir = path.join(__dirname, "..");
+const configuredBasePath = (process.env.APP_BASE_PATH || "").trim();
 
 const allowedConnectorTypes = new Set(["csv_url", "api_json", "sftp_csv"]);
 const runningConnectorIds = new Set();
@@ -38,6 +39,27 @@ function send(res, status, body, contentType = "text/plain; charset=utf-8") {
 
 function sendJson(res, status, payload) {
   send(res, status, JSON.stringify(payload), "application/json; charset=utf-8");
+}
+
+function normalizeBasePath(input) {
+  if (!input) return "";
+  if (input === "/") return "";
+  const withLeading = input.startsWith("/") ? input : `/${input}`;
+  return withLeading.endsWith("/") ? withLeading.slice(0, -1) : withLeading;
+}
+
+function inferBasePath(rawPathname) {
+  const normalizedConfigured = normalizeBasePath(configuredBasePath);
+  if (normalizedConfigured) return normalizedConfigured;
+  if (rawPathname === "/mp" || rawPathname.startsWith("/mp/")) return "/mp";
+  return "";
+}
+
+function stripBasePath(rawPathname, basePath) {
+  if (!basePath) return rawPathname;
+  if (rawPathname === basePath) return "/";
+  if (rawPathname.startsWith(`${basePath}/`)) return rawPathname.slice(basePath.length) || "/";
+  return rawPathname;
 }
 
 async function readJsonBody(req) {
@@ -286,7 +308,8 @@ const server = http.createServer(async (req, res) => {
   }
 
   const url = new URL(req.url, `http://localhost:${PORT}`);
-  const pathname = url.pathname;
+  const basePath = inferBasePath(url.pathname);
+  const pathname = stripBasePath(url.pathname, basePath);
 
   try {
     if (req.method === "GET" && pathname === "/api/health") {
@@ -620,7 +643,7 @@ const server = http.createServer(async (req, res) => {
       setCrm(crm);
 
       res.writeHead(302, {
-        Location: `/?src=postcard&campaign=${encodeURIComponent(campaignCode)}&variant=${encodeURIComponent(variant)}`,
+        Location: `${basePath || ""}/?src=postcard&campaign=${encodeURIComponent(campaignCode)}&variant=${encodeURIComponent(variant)}`,
         "cache-control": "no-store",
       });
       res.end();
