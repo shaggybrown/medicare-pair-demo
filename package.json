@@ -1,0 +1,14 @@
+{
+  "name": "silverreach-ops",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bulk Medicare lead ops with connector automation",
+  "scripts": {
+    "start": "node backend/server.js",
+    "start:web": "python3 -m http.server 5173",
+    "check": "node --check backend/server.js && node --check backend/lib/connectors.js && node --check backend/lib/csv.js && node --check backend/lib/store.js && node --check app.js && node --check admin.js"
+  },
+  "optionalDependencies": {
+    "ssh2-sftp-client": "^11.0.0"
+  }
+}

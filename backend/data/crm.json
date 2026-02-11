@@ -1,0 +1,185 @@
+{
+  "events": [
+    {
+      "id": "evt-1001",
+      "title": "Medicare Basics Seminar",
+      "date": "2026-02-18T15:38:25.848Z",
+      "location": "Lorain Community Center",
+      "seatsTotal": 40,
+      "seatsBooked": 26,
+      "status": "OPEN",
+      "notes": "Educational only. No plan enrollment during seminar."
+    },
+    {
+      "id": "evt-1002",
+      "title": "Turning 65 Workshop",
+      "date": "2026-03-01T15:38:25.848Z",
+      "location": "Avon Library Meeting Room",
+      "seatsTotal": 35,
+      "seatsBooked": 12,
+      "status": "OPEN",
+      "notes": "Focus on enrollment deadlines."
+    }
+  ],
+  "consultations": [
+    {
+      "id": "con-2001",
+      "name": "Patricia Jenkins",
+      "phone": "(440) 555-1012",
+      "zip": "44011",
+      "need": "Turning 65 soon",
+      "timePreference": "Morning",
+      "status": "NEW",
+      "assignedTo": "Joe",
+      "source": "postcard",
+      "campaignCode": "SPRING65",
+      "variant": "A",
+      "createdAt": "2026-02-10T15:38:25.848Z",
+      "notes": ""
+    },
+    {
+      "id": "con-2002",
+      "name": "Ronald Banks",
+      "phone": "(216) 555-7781",
+      "zip": "44035",
+      "need": "Prescription costs",
+      "timePreference": "Afternoon",
+      "status": "ATTEMPTED",
+      "assignedTo": "MaryBeth",
+      "source": "website",
+      "campaignCode": "",
+      "variant": "",
+      "createdAt": "2026-02-09T15:38:25.848Z",
+      "notes": "Left voicemail."
+    },
+    {
+      "id": "con-2003",
+      "name": "Deborah Bryant",
+      "phone": "(440) 555-4381",
+      "zip": "44052",
+      "need": "Changing plans",
+      "timePreference": "Evening",
+      "status": "BOOKED",
+      "assignedTo": "Joe",
+      "source": "seminar",
+      "campaignCode": "",
+      "variant": "",
+      "createdAt": "2026-02-07T15:38:25.848Z",
+      "notes": "Booked for next Tuesday."
+    }
+  ],
+  "attendees": [
+    {
+      "id": "att-3001",
+      "eventId": "evt-1001",
+      "name": "Gregory Gaines",
+      "phone": "(440) 555-2201",
+      "status": "REGISTERED",
+      "source": "postcard",
+      "campaignCode": "SPRING65",
+      "variant": "B",
+      "createdAt": "2026-02-08T15:38:25.848Z"
+    },
+    {
+      "id": "att-3002",
+      "eventId": "evt-1001",
+      "name": "Anita Collins",
+      "phone": "(440) 555-2219",
+      "status": "CONFIRMED",
+      "source": "website",
+      "campaignCode": "",
+      "variant": "",
+      "createdAt": "2026-02-09T15:38:25.848Z"
+    },
+    {
+      "id": "att-3003",
+      "eventId": "evt-1002",
+      "name": "Jerome Adler",
+      "phone": "(440) 555-9782",
+      "status": "NO_SHOW",
+      "source": "postcard",
+      "campaignCode": "WINTERRESET",
+      "variant": "A",
+      "createdAt": "2026-02-04T15:38:25.848Z"
+    }
+  ],
+  "postcards": [
+    {
+      "id": "pc-4001",
+      "name": "Spring Turning 65",
+      "campaignCode": "SPRING65",
+      "variant": "A",
+      "headline": "Turning 65 Soon?",
+      "offer": "Free 1-on-1 Medicare review",
+      "sentCount": 2500,
+      "scans": 196,
+      "consultationConversions": 42,
+      "seminarConversions": 19,
+      "status": "ACTIVE"
+    },
+    {
+      "id": "pc-4002",
+      "name": "Spring Turning 65",
+      "campaignCode": "SPRING65",
+      "variant": "B",
+      "headline": "Avoid Medicare Mistakes",
+      "offer": "Reserve your seminar seat",
+      "sentCount": 2500,
+      "scans": 154,
+      "consultationConversions": 28,
+      "seminarConversions": 31,
+      "status": "ACTIVE"
+    },
+    {
+      "id": "pc-4003",
+      "name": "Winter Reactivation",
+      "campaignCode": "WINTERRESET",
+      "variant": "A",
+      "headline": "Review Your Medicare Plan",
+      "offer": "Annual plan checkup",
+      "sentCount": 1800,
+      "scans": 88,
+      "consultationConversions": 17,
+      "seminarConversions": 4,
+      "status": "PAUSED"
+    }
+  ],
+  "scans": [
+    {
+      "id": "scan-5001",
+      "campaignCode": "SPRING65",
+      "variant": "A",
+      "timestamp": "2026-02-10T15:38:25.848Z"
+    },
+    {
+      "id": "scan-5002",
+      "campaignCode": "SPRING65",
+      "variant": "B",
+      "timestamp": "2026-02-10T15:38:25.848Z"
+    },
+    {
+      "id": "scan-5003",
+      "campaignCode": "WINTERRESET",
+      "variant": "A",
+      "timestamp": "2026-02-06T15:38:25.848Z"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "tsk-6001",
+      "title": "Call Patricia Jenkins for consultation confirmation",
+      "owner": "Joe",
+      "dueDate": "2026-02-11T15:38:25.848Z",
+      "status": "OPEN",
+      "type": "CALL"
+    },
+    {
+      "id": "tsk-6002",
+      "title": "Follow up with Jerome Adler no-show",
+      "owner": "MaryBeth",
+      "dueDate": "2026-02-12T15:38:25.848Z",
+      "status": "OPEN",
+      "type": "NO_SHOW_RECOVERY"
+    }
+  ]
+}

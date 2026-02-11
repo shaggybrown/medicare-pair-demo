@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joe & MaryBeth Jessome | The Medicare Pair</title>
+    <meta
+      name="description"
+      content="Trusted Medicare guidance from Joe and MaryBeth Jessome. Book a personal consultation or reserve a Medicare seminar seat."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="top-nav">
+      <a href="/" class="brand" aria-label="The Medicare Pair home">
+        <span class="brand-badge">MP</span>
+        <span>
+          <strong>The Medicare Pair</strong>
+          <small>Joe and MaryBeth Jessome</small>
+        </span>
+      </a>
+      <div class="nav-tools">
+        <a class="btn btn-ghost" href="/admin.html">Admin</a>
+        <a class="btn btn-ghost" href="#consult">Book Consultation</a>
+        <a class="btn btn-primary" href="tel:+12165034990">Call (216) 503-4990</a>
+      </div>
+    </header>
+
+    <main class="container">
+      <section id="sourceBanner" class="source-banner hidden"></section>
+      <section class="free-banner card reveal">
+        <strong>100% Free Medicare Help.</strong> No obligation. No pressure. No commitment required.
+      </section>
+
+      <section class="hero card reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Trusted Medicare help in NE Ohio</p>
+          <h1>Feel confident choosing Medicare with Joe and MaryBeth by your side.</h1>
+          <p class="lead">
+            Joe and MaryBeth explain your Medicare options in plain language and guide you step-by-step,
+            so you can choose coverage that fits your doctors, prescriptions, and budget.
+          </p>
+          <p class="lead emphasis">Every consultation and seminar is completely free with no obligation to enroll.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#consult">Book Free Consultation</a>
+            <a class="btn btn-secondary" href="#seminar">Reserve Free Seminar Seat</a>
+          </div>
+          <ul class="trust-points">
+            <li>Local, one-on-one Medicare guidance</li>
+            <li>Education-first approach with no pressure</li>
+            <li>Support for Advantage, Supplement, and Part D</li>
+          </ul>
+        </div>
+
+        <div class="hero-photo-wrap">
+          <img src="/assets/joe-marybeth.png" alt="Joe and MaryBeth Jessome" class="hero-photo" id="teamPhoto" />
+          <p class="photo-note">Joe & MaryBeth Jessome, Your Medicare Pair</p>
+        </div>
+      </section>
+
+      <section class="card section reveal" id="finder">
+        <h2>Quick Medicare Path Finder</h2>
+        <p class="section-intro">Answer 5 questions to see your best starting path.</p>
+        <form id="finderForm" class="split-form">
+          <label>
+            Your age
+            <input type="number" id="age" min="64" max="95" value="67" required />
+          </label>
+          <label>
+            Keep current doctors is...
+            <select id="doctorPriority" required>
+              <option value="high" selected>Very important</option>
+              <option value="medium">Somewhat important</option>
+              <option value="low">Not important</option>
+            </select>
+          </label>
+          <label>
+            Regular prescriptions
+            <input type="number" id="prescriptions" min="0" max="20" value="4" required />
+          </label>
+          <label>
+            Monthly cost preference
+            <select id="budget" required>
+              <option value="low">Lowest monthly premium</option>
+              <option value="medium" selected>Balanced</option>
+              <option value="high">Pay more for flexibility</option>
+            </select>
+          </label>
+          <label>
+            Do you travel often?
+            <select id="travel" required>
+              <option value="yes" selected>Yes</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+          <label>
+            Date of birth
+            <input type="date" id="birthDate" required />
+          </label>
+          <button class="btn btn-primary" type="submit">Show My Recommendation</button>
+        </form>
+
+        <div class="recommendation-panel">
+          <div id="recommendation" class="recommendation"></div>
+          <div class="meter-wrap">
+            <p>Recommendation confidence</p>
+            <div class="meter"><span id="fitMeter"></span></div>
+          </div>
+          <div id="chips" class="chips"></div>
+        </div>
+      </section>
+
+      <section class="grid reveal">
+        <article class="card section">
+          <h2>Estimated Cost View</h2>
+          <p class="section-intro">Use this to prepare questions before your consultation.</p>
+          <div class="stats-grid">
+            <div class="stat">
+              <p>Estimated Annual Cost</p>
+              <h3 id="annualCostStat">$4,020</h3>
+            </div>
+            <div class="stat">
+              <p>Plan Confidence</p>
+              <h3 id="confidenceStat">76%</h3>
+            </div>
+            <div class="stat">
+              <p>Action Progress</p>
+              <h3 id="readinessStat">0%</h3>
+            </div>
+          </div>
+          <div class="table-wrap top-gap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Option</th>
+                  <th>Monthly</th>
+                  <th>Doctor Access</th>
+                  <th>Risk Level</th>
+                </tr>
+              </thead>
+              <tbody id="optionRows"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card section" id="seminar">
+          <h2>Upcoming Medicare Seminar</h2>
+          <p class="section-intro">Free educational event with no obligation and no plan sales at the seminar.</p>
+          <div class="seminar-box">
+            <p><strong>Selected Event:</strong> <span id="eventSummary">Loading...</span></p>
+            <p><strong>Seats Left:</strong> <span id="seatsLeft">--</span></p>
+            <p><strong>Countdown:</strong> <span id="countdown">--</span></p>
+          </div>
+
+          <form id="seminarForm" class="stack-form">
+            <label>
+              Choose seminar event
+              <select id="seminarEvent" required></select>
+            </label>
+            <label>
+              Your name
+              <input type="text" id="seminarName" required />
+            </label>
+            <label>
+              Phone
+              <input type="tel" id="seminarPhone" required />
+            </label>
+            <button class="btn btn-secondary" type="submit">Reserve My Seat</button>
+          </form>
+          <p id="seminarStatus" class="status"></p>
+        </article>
+      </section>
+
+      <section class="card section reveal">
+        <h2>Enrollment Timeline</h2>
+        <p class="section-intro">Know these dates so you can avoid unnecessary penalties.</p>
+        <div id="timeline" class="timeline"></div>
+      </section>
+
+      <section class="card section reveal">
+        <h2>Why Seniors Trust Joe and MaryBeth</h2>
+        <div class="testimonial-grid">
+          <article class="quote">
+            <p>"I feel very comfortable calling Joseph anytime. It feels good to have someone who cares that I understand."</p>
+            <strong>Patricia J.</strong>
+          </article>
+          <article class="quote">
+            <p>"This seminar was much better than others we attended. Everything was clear and practical."</p>
+            <strong>Greg G.</strong>
+          </article>
+          <article class="quote">
+            <p>"They made a very confusing process finally make sense for me and my husband."</p>
+            <strong>Deborah B.</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="card section reveal" id="consult">
+        <h2>Book a Personal Consultation</h2>
+        <p class="section-intro">Free one-on-one Medicare review with Joe or MaryBeth. No obligation to enroll.</p>
+        <form id="consultForm" class="split-form">
+          <label>
+            Full name
+            <input type="text" id="consultName" required />
+          </label>
+          <label>
+            Phone number
+            <input type="tel" id="consultPhone" required />
+          </label>
+          <label>
+            Zip code
+            <input type="text" id="consultZip" maxlength="10" required />
+          </label>
+          <label>
+            Preferred callback time
+            <select id="consultTime" required>
+              <option>Morning</option>
+              <option selected>Afternoon</option>
+              <option>Evening</option>
+            </select>
+          </label>
+          <label class="full-width">
+            What do you need help with?
+            <select id="consultNeed" required>
+              <option>Turning 65 soon</option>
+              <option>Changing plans</option>
+              <option>Prescription costs</option>
+              <option>Still working past 65</option>
+            </select>
+          </label>
+          <button class="btn btn-primary" type="submit">Yes, Schedule My Consultation</button>
+        </form>
+        <p id="consultStatus" class="status"></p>
+      </section>
+
+      <section class="card section reveal">
+        <h2>Simple Medicare Terms</h2>
+        <div id="glossaryList" class="faq-list"></div>
+      </section>
+    </main>
+
+    <div class="sticky-cta" role="region" aria-label="Quick call to action">
+      <p>Have questions now? Get free help with no obligation.</p>
+      <a href="#consult" class="btn btn-primary">Book Free Consultation</a>
+      <a href="#seminar" class="btn btn-secondary">Save Free Seminar Seat</a>
+    </div>
+
+    <footer class="site-footer">
+      <p>Joe & MaryBeth Jessome | The Medicare Pair | (216) 503-4990</p>
+      <p>
+        We do not offer every plan available in your area. Information provided is limited to plans we do offer.
+        Contact Medicare.gov, 1-800-MEDICARE, or your State Health Insurance Program for all options.
+      </p>
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

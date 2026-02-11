@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | The Medicare Pair</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/admin.css" />
+  </head>
+  <body>
+    <header class="admin-header">
+      <div>
+        <p class="eyebrow">The Medicare Pair CRM</p>
+        <h1>Admin Dashboard</h1>
+      </div>
+      <div class="header-actions">
+        <a class="btn btn-ghost" href="/">View Public Site</a>
+        <button id="refreshBtn" class="btn btn-primary">Refresh Data</button>
+      </div>
+    </header>
+
+    <main class="admin-container">
+      <section class="kpi-grid" id="kpiGrid"></section>
+
+      <section class="card">
+        <h2>Lead Workflow Queues</h2>
+        <div class="three-col">
+          <article>
+            <h3>Call Queue</h3>
+            <div id="callQueue"></div>
+          </article>
+          <article>
+            <h3>No-Show Recovery</h3>
+            <div id="noShowQueue"></div>
+          </article>
+          <article>
+            <h3>Hot Postcard Leads</h3>
+            <div id="hotLeads"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="grid-two">
+        <article class="card">
+          <h2>Consultation Bookings</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Need</th>
+                  <th>Status</th>
+                  <th>Assigned</th>
+                  <th>Source</th>
+                  <th>Save</th>
+                </tr>
+              </thead>
+              <tbody id="consultationRows"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Seminar Attendees</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Event</th>
+                  <th>Phone</th>
+                  <th>Status</th>
+                  <th>Source</th>
+                  <th>Save</th>
+                </tr>
+              </thead>
+              <tbody id="attendeeRows"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid-two">
+        <article class="card">
+          <h2>Manage Events</h2>
+          <form id="eventForm" class="stack-form">
+            <label>Title <input type="text" id="eventTitle" required /></label>
+            <label>Date & Time <input type="datetime-local" id="eventDate" required /></label>
+            <label>Location <input type="text" id="eventLocation" required /></label>
+            <label>Total Seats <input type="number" id="eventSeats" min="1" value="40" required /></label>
+            <label>Notes <input type="text" id="eventNotes" /></label>
+            <button class="btn btn-primary" type="submit">Create Event</button>
+          </form>
+          <p id="eventStatus" class="status"></p>
+
+          <div class="table-wrap top-gap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Event</th>
+                  <th>Date</th>
+                  <th>Seats</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="eventRows"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Task Board</h2>
+          <form id="taskForm" class="stack-form">
+            <label>Task <input type="text" id="taskTitle" required /></label>
+            <label>Owner
+              <select id="taskOwner" required>
+                <option>Joe</option>
+                <option>MaryBeth</option>
+                <option>Team</option>
+              </select>
+            </label>
+            <label>Due Date <input type="date" id="taskDue" required /></label>
+            <label>Type
+              <select id="taskType" required>
+                <option value="CALL">Call</option>
+                <option value="NO_SHOW_RECOVERY">No-show Recovery</option>
+                <option value="FOLLOW_UP">Follow-up</option>
+              </select>
+            </label>
+            <button class="btn btn-primary" type="submit">Add Task</button>
+          </form>
+          <p id="taskStatus" class="status"></p>
+
+          <div id="taskList" class="task-list"></div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Postcard A/B Lab + QR Tracking</h2>
+        <form id="postcardForm" class="postcard-form">
+          <label>Name <input type="text" id="pcName" required /></label>
+          <label>Campaign Code <input type="text" id="pcCampaign" required /></label>
+          <label>Variant <input type="text" id="pcVariant" value="A" required /></label>
+          <label>Headline <input type="text" id="pcHeadline" /></label>
+          <label>Offer <input type="text" id="pcOffer" /></label>
+          <label>Sent Count <input type="number" id="pcSent" min="0" value="0" /></label>
+          <button class="btn btn-primary" type="submit">Create Postcard Variant</button>
+        </form>
+        <p id="postcardStatus" class="status"></p>
+
+        <div class="grid-two top-gap">
+          <div>
+            <h3>Campaign Variants</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Campaign</th>
+                    <th>Variant</th>
+                    <th>Scans</th>
+                    <th>Conversions</th>
+                    <th>Rate</th>
+                    <th>QR</th>
+                  </tr>
+                </thead>
+                <tbody id="postcardRows"></tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <h3>QR Preview</h3>
+            <div class="qr-panel">
+              <img id="qrImage" alt="QR preview" />
+              <p id="qrUrl"></p>
+            </div>
+            <h3>A/B Winner Snapshot</h3>
+            <div id="abSummary"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/admin.js"></script>
+  </body>
+</html>
