@@ -18,7 +18,7 @@ const {
 const PORT = Number(process.env.PORT || 8787);
 const CONNECTOR_TICK_MS = Number(process.env.CONNECTOR_TICK_MS || 60000);
 const rootDir = path.join(__dirname, "..");
-const configuredBasePath = (process.env.APP_BASE_PATH || "").trim();
+const configuredBasePath = (process.env.APP_BASE_PATH || process.env.PASSENGER_BASE_URI || "").trim();
 
 const allowedConnectorTypes = new Set(["csv_url", "api_json", "sftp_csv"]);
 const runningConnectorIds = new Set();
@@ -50,7 +50,12 @@ function normalizeBasePath(input) {
 
 function inferBasePath(rawPathname) {
   const normalizedConfigured = normalizeBasePath(configuredBasePath);
-  if (normalizedConfigured) return normalizedConfigured;
+  if (
+    normalizedConfigured &&
+    (rawPathname === normalizedConfigured || rawPathname.startsWith(`${normalizedConfigured}/`))
+  ) {
+    return normalizedConfigured;
+  }
   if (rawPathname === "/mp" || rawPathname.startsWith("/mp/")) return "/mp";
   return "";
 }
@@ -59,6 +64,12 @@ function stripBasePath(rawPathname, basePath) {
   if (!basePath) return rawPathname;
   if (rawPathname === basePath) return "/";
   if (rawPathname.startsWith(`${basePath}/`)) return rawPathname.slice(basePath.length) || "/";
+  return rawPathname;
+}
+
+function normalizePathname(rawPathname) {
+  if (!rawPathname) return "/";
+  if (rawPathname.length > 1 && rawPathname.endsWith("/")) return rawPathname.slice(0, -1);
   return rawPathname;
 }
 
@@ -309,7 +320,7 @@ const server = http.createServer(async (req, res) => {
 
   const url = new URL(req.url, `http://localhost:${PORT}`);
   const basePath = inferBasePath(url.pathname);
-  const pathname = stripBasePath(url.pathname, basePath);
+  const pathname = normalizePathname(stripBasePath(url.pathname, basePath));
 
   try {
     if (req.method === "GET" && pathname === "/api/health") {
